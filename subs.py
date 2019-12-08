@@ -1,16 +1,16 @@
 import sys
 
 
-def substr_locs(seq, subseq):
+def substr_locs(string, substr):
     ''' Locate all occurrences of substring in string
-    :param seq: sequence to search within (string)
-    :param subseq: subsequence to search for (string)
+    :param string: string to search within (string)
+    :param substr: substring to search for (string)
     :return: the locations of substring occurrences in string (list of integers, 1-based)
     '''
     match_idx = []
-    k = len(subseq)
-    for i in range(len(seq) - k + 1):
-        if seq[i:i+k] == subseq:
+    k = len(substr)
+    for i in range(len(string) - k + 1):
+        if string[i:i+k] == substr:
             match_idx.append(i + 1)
     return match_idx
 

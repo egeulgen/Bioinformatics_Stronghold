@@ -1,4 +1,6 @@
 import sys
+from rosalind_utility import parse_fasta
+from prot import rna2prot
 
 CODON_TBL = {
     "UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
@@ -19,25 +21,19 @@ CODON_TBL = {
     "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G"
 }
 
-
-def rna2prot(RNA_string):
-    ''' Translate RNA string to protein string
-    :param RNA_string: RNA string to translate (string)
-    :return: the protein string (string)
-    '''
-    protein = ""
-    for i in range(0, len(RNA_string) - 2, 3):
-        aa = CODON_TBL[RNA_string[i:i+3]]
-        if aa != "STOP":
-            protein += aa
-    return protein
-
-
 if __name__ == "__main__":
     '''
-    Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
-    Return: The protein string encoded by s.
+    Given: A DNA string s (of length at most 1 kbp) and a collection of substrings of s acting as introns. All strings 
+    are given in FASTA format.
+    Return: A protein string resulting from transcribing and translating the exons of s. (Note: Only one solution will 
+    exist for the dataset provided.)
     '''
     input_lines = sys.stdin.read().splitlines()
-    rna_str = input_lines[0]
-    print(rna2prot(rna_str))
+    strings = parse_fasta(input_lines)
+    strings = list(strings.values()) ## dictionary keeps insertion order?
+    DNA_string = strings[0]
+    introns = strings[1:]
+    for intron in introns:
+        DNA_string = DNA_string.replace(intron, "")
+    DNA_string = DNA_string.replace("T", "U")
+    print(rna2prot(DNA_string))

@@ -1,14 +1,14 @@
 import sys
-from utility_funcs import parse_fasta
+from rosalind_utility import parse_fasta
 
 
-def calculate_gc_content(seq):
+def calculate_gc_content(string):
     ''' Calculate GC content
-    :param seq: sequence to calculate GC content for (string)
+    :param string: string to calculate GC content for (string)
     :return: GC content (float)
     '''
-    count_gc = seq.count("G") + seq.count("C")
-    gc_content = count_gc / len(seq)
+    count_gc = string.count("G") + string.count("C")
+    gc_content = count_gc / len(string)
     return gc_content
 
 
@@ -18,9 +18,10 @@ if __name__ == "__main__":
     Return: The ID of the string having the highest GC-content, followed by the GC-content of that string.
     '''
     input_lines = sys.stdin.read().splitlines()
-    DNA_seqs = parse_fasta(input_lines)
+    DNA_strs = parse_fasta(input_lines)
     max_GC_content = -1
-    for name, seq in DNA_seqs.items():
+    max_name = ''
+    for name, seq in DNA_strs.items():
         GC_content = calculate_gc_content(seq)
         if GC_content > max_GC_content:
             max_name = name

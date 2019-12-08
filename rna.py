@@ -1,12 +1,12 @@
 import sys
 
 
-def transcribe(sequence):
-    ''' Transcribe a DNA sequence to an RNA sequence
-    :param sequence: sequence to transcribe from (string)
-    :return: the transcribed RNA (string)
+def transcribe(string):
+    ''' Transcribe a DNA string to an RNA string
+    :param string: string to transcribe from (string)
+    :return: the transcribed RNA string (string)
     '''
-    return sequence.replace('T', 'U')
+    return string.replace('T', 'U')
 
 
 if __name__ == "__main__":
