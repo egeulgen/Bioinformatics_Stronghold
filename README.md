@@ -44,3 +44,4 @@
 1. [Error Correction in Reads](solutions/corr.py)
 1. [Finding a Shared Spliced Motif](solutions/lcsq.py)
 1. [Ordering Strings of Varying Length Lexicographically](solutions/lexv.py)
+1. [Reversal Distance](solutions/rear.py)
