@@ -45,3 +45,9 @@
 1. [Finding a Shared Spliced Motif](solutions/lcsq.py)
 1. [Ordering Strings of Varying Length Lexicographically](solutions/lexv.py)
 1. [Reversal Distance](solutions/rear.py)
+1. [Distances in Trees](solutions/nwck.py)
+1. [Introduction to Alternative Splicing](solutions/aspc.py)
+1. [Introduction to Set Operations](solutions/seto.py)
+
+1. [Edit Distance](solutions/edit.py)
+1. [Sorting by Reversals](solutions/sort.py)
