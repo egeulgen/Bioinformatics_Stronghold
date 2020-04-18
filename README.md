@@ -48,6 +48,10 @@
 1. [Distances in Trees](solutions/nwck.py)
 1. [Introduction to Alternative Splicing](solutions/aspc.py)
 1. [Introduction to Set Operations](solutions/seto.py)
+1. [Motzkin Numbers and RNA Secondary Structures](solutions/motz.py)
+1. [Inferring Protein from Spectrum](solutions/spec.py)
+1. [Introduction to Pattern Matching](solutions/trie.py)
+1. [Interleaving Two Motifs](solutions/scsp.py)
 
 1. [Edit Distance](solutions/edit.py)
 1. [Sorting by Reversals](solutions/sort.py)
