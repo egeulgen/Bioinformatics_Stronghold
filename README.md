@@ -52,6 +52,6 @@
 1. [Inferring Protein from Spectrum](solutions/spec.py)
 1. [Introduction to Pattern Matching](solutions/trie.py)
 1. [Interleaving Two Motifs](solutions/scsp.py)
-
+1. [Expected Number of Restriction Sites](solutions/eval.py)
 1. [Edit Distance](solutions/edit.py)
 1. [Sorting by Reversals](solutions/sort.py)
