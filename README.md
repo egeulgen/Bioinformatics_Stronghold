@@ -55,3 +55,9 @@
 1. [Expected Number of Restriction Sites](solutions/eval.py)
 1. [Edit Distance](solutions/edit.py)
 1. [Sorting by Reversals](solutions/sort.py)
+1. [Newick Format with Edge Weights](solutions/nkew.py)
+
+1. [Edit Distance Alignment](solutions/edta.py)
+
+1. [Global Alignment with Scoring Matrix](solutions/glob.py)
+

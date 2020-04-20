@@ -14,10 +14,10 @@ class Node():
         return "Node_" + str(self.number) + tmp
 
 
-class Newick():
+class WeightedNewick():
     def __init__(self, data):
         self.nodes = []
-        self.node_index = 0
+        self.edge_weight = {}
         self.construct_tree(data)
         self.name_index = {node.name: node.number for node in self.nodes}
 
@@ -32,13 +32,14 @@ class Newick():
 
             elif item[0] == ')':
                 if len(item) > 1:
-                    current_parent.name = item[1:]
+                    self.edge_weight[(current_parent.number, current_parent.parent)] = int(item[item.find(':') + 1:])
+                    if len(item) > 2:
+                        current_parent.name = item[1:item.find(':')]
                 current_parent = self.nodes[current_parent.parent]
 
             else:
-                self.nodes[current_parent.number].add_child(len(self.nodes))
-                self.nodes.append(Node(len(self.nodes), current_parent.number, item))
-
+                self.edge_weight[(len(self.nodes), current_parent.number)] = int(item[item.find(':') + 1:])
+                self.nodes.append(Node(len(self.nodes), current_parent.number, item[:item.find(':')]))
 
     def distance(self, name1, name2):
         '''Returns the distance between name1 and name2.'''
@@ -46,28 +47,33 @@ class Newick():
             return 0
 
         # Create the branches from the two desired nodes to the root.
-        branch1 = [self.name_index[name1]]
-        branch2 = [self.name_index[name2]]
-        while self.nodes[branch1[-1]].parent != -1:
-            branch1.append(self.nodes[branch1[-1]].parent)
-        while self.nodes[branch2[-1]].parent != -1:
-            branch2.append(self.nodes[branch2[-1]].parent)
+        idx1 = self.name_index[name1]
+        branch1 = [(idx1, self.nodes[idx1].parent)]
+        idx2 = self.name_index[name2]
+        branch2 = [(idx2, self.nodes[idx2].parent)]
+        while branch1[-1][1] != -1:
+            current_idx = branch1[-1][1]
+            branch1.append((current_idx, self.nodes[current_idx].parent))
+        while branch2[-1][1] != -1:
+            current_idx = branch2[-1][1]
+            branch2.append((current_idx, self.nodes[current_idx].parent))
 
-        return len(set(branch1) ^ set(branch2))
+        return sum([self.edge_weight[edge] for edge in set(branch1) ^ set(branch2)])
 
 
 if __name__ == "__main__":
     '''
-    Given: A collection of n trees (n≤40) in Newick format, with each tree containing at most 200 nodes; each tree Tk is followed by a pair of nodes xk and yk in Tk.
-    Return: A collection of n positive integers, for which the kth integer represents the distance between xk and yk in Tk.
+    Given: A collection of n weighted trees (n≤40) in Newick format, with each tree containing at most 200 nodes; each 
+    tree Tk is followed by a pair of nodes xk and yk in Tk.
+    Return: A collection of n numbers, for which the kth number represents the distance between xk and yk in Tk.
     '''
     input_lines = sys.stdin.read().splitlines()
 
     distance_list = []
-    for i in range(0, len(input_lines) - 2, 3):
+    for i in range(0, len(input_lines) - 1, 3):
         tree = input_lines[i]
         nodeA, nodeB = input_lines[i + 1].split()
 
-        distance_list.append(str(Newick(tree).distance(nodeA, nodeB)))
+        distance_list.append(str(WeightedNewick(tree).distance(nodeA, nodeB)))
 
     print(" ".join(distance_list))
