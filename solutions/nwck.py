@@ -5,6 +5,7 @@ class Node():
     def __init__(self, number, parent, name = None):
         self.number = number
         self.parent = parent
+        self.children = []
         self.name = "Node_" + str(self.number) if name is None else name
 
     def __repr__(self):
@@ -13,11 +14,16 @@ class Node():
             tmp = "(" + self.name + ")"
         return "Node_" + str(self.number) + tmp
 
+    def add_child(self, child):
+        '''Add a child to the node.'''
+        self.children.append(child)
+
 
 class Newick():
     def __init__(self, data):
         self.nodes = []
         self.node_index = 0
+        self.edges = []
         self.construct_tree(data)
         self.name_index = {node.name: node.number for node in self.nodes}
 
@@ -29,6 +35,9 @@ class Newick():
             if item[0] == '(':
                 current_parent = Node(len(self.nodes), current_parent.number)
                 self.nodes.append(current_parent)
+                if len(self.nodes) > 1:
+                    self.nodes[current_parent.parent].add_child(current_parent.number)
+                    self.edges.append((current_parent.parent, current_parent.number))
 
             elif item[0] == ')':
                 if len(item) > 1:
@@ -37,8 +46,12 @@ class Newick():
 
             else:
                 self.nodes[current_parent.number].add_child(len(self.nodes))
+                self.edges.append((current_parent.number, len(self.nodes)))
                 self.nodes.append(Node(len(self.nodes), current_parent.number, item))
 
+    def edge_names(self):
+        '''Return a list of edges referencing node names.'''
+        return [(self.nodes[edge[0]].name, self.nodes[edge[1]].name) for edge in self.edges]
 
     def distance(self, name1, name2):
         '''Returns the distance between name1 and name2.'''
@@ -54,6 +67,13 @@ class Newick():
             branch2.append(self.nodes[branch2[-1]].parent)
 
         return len(set(branch1) ^ set(branch2))
+
+    def get_descendants(self, node_name):
+        descendants = []
+        for child in self.nodes[self.name_index[node_name]].children:
+            descendants.append(self.nodes[child].name)
+            descendants += self.get_descendants(self.nodes[child].name)
+        return descendants
 
 
 if __name__ == "__main__":

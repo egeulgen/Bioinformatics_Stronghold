@@ -56,6 +56,7 @@
 1. [Edit Distance](solutions/edit.py)
 1. [Sorting by Reversals](solutions/sort.py)
 1. [Newick Format with Edge Weights](solutions/nkew.py)
+1. [Creating a Character Table](solutions/ctbl.py)
 
 1. [Edit Distance Alignment](solutions/edta.py)
 
