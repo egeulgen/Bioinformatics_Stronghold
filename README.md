@@ -61,6 +61,7 @@
 1. [Constructing a De Bruijn Graph](solutions/dbru.py)
 1. [Comparing Spectra with the Spectral Convolution](solutions/conv.py)
 1. [Wobble Bonding and RNA Secondary Structures](solutions/rnas.py)
+1. [Inferring Peptide from Full Spectrum](solutions/full.py)
 
 1. [Edit Distance Alignment](solutions/edta.py)
 
