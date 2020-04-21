@@ -65,6 +65,14 @@
 1. [Finding Disjoint Motifs in a Gene](solutions/itwv.py)
 1. [Finding the Longest Multiple Repeat](solutions/lrep.py)
 1. [Edit Distance Alignment](solutions/edta.py)
-
+1. [Counting Unrooted Binary Trees](solutions/cunr.py)
+1. [Quartets](solutions/qrt.py)
+1. [Counting Disease Carriers](solutions/afrq.py)
+1. [Creating a Character Table from Genetic Strings](solutions/cstr.py)
+1. [Genome Assembly with Perfect Coverage](solutions/pcov.py)
+1. [Matching a Spectrum to a Protein](solutions/prsm.py)
+1. [Using the Spectrum Graph to Infer Peptides](solutions/sgra.py)
+1. [Encoding Suffix Trees](solutions/suff.py)
+1. [Counting Optimal Alignments](solutions/ctea.py)
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
 
