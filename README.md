@@ -58,6 +58,7 @@
 1. [Newick Format with Edge Weights](solutions/nkew.py)
 1. [Creating a Character Table](solutions/ctbl.py)
 1. [Independent Segregation of Chromosomes](solutions/indc.py)
+1. [Constructing a De Bruijn Graph](solutions/dbru.py)
 
 1. [Edit Distance Alignment](solutions/edta.py)
 
