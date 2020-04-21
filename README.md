@@ -62,7 +62,8 @@
 1. [Comparing Spectra with the Spectral Convolution](solutions/conv.py)
 1. [Wobble Bonding and RNA Secondary Structures](solutions/rnas.py)
 1. [Inferring Peptide from Full Spectrum](solutions/full.py)
-
+1. [Finding Disjoint Motifs in a Gene](solutions/itwv.py)
+1. [Finding the Longest Multiple Repeat](solutions/lrep.py)
 1. [Edit Distance Alignment](solutions/edta.py)
 
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
