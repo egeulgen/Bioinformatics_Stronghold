@@ -76,3 +76,7 @@
 1. [Counting Optimal Alignments](solutions/ctea.py)
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
 
+
+1. [Local Alignment with Scoring Matrix](solutions/loca.py)
+1. [Global Alignment with Constant Gap Penalty](solutions/gcon.py)
+
