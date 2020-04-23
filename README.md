@@ -77,6 +77,7 @@
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
 
 
+1. [Linguistic Complexity of a Genome](solutions/ling.py)
 1. [Maximizing the Gap Symbols of an Optimal Alignment](solutions/mgap.py)
 1. [Local Alignment with Scoring Matrix](solutions/loca.py)
 1. [Global Alignment with Constant Gap Penalty](solutions/gcon.py)
