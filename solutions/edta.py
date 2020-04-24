@@ -7,15 +7,15 @@ def edit_distance_alignment(str1, str2):
     str2 = "-" + str2
 
     score_mat = [[0 for i in range(len(str2))] for j in range(len(str1))]
-    bactrace_mat = [[None for i in range(len(str2))] for j in range(len(str1))]
+    backtrack_mat = [[None for i in range(len(str2))] for j in range(len(str1))]
 
     for i in range(len(str2)):
         score_mat[0][i] = i
-        bactrace_mat[0][i] = "l"
+        backtrack_mat[0][i] = "l"
 
     for j in range(len(str1)):
         score_mat[j][0] = j
-        bactrace_mat[j][0] = "u"
+        backtrack_mat[j][0] = "u"
 
     for i in range(1, len(str2)):
         for j in range(1, len(str1)):
@@ -24,18 +24,18 @@ def edit_distance_alignment(str1, str2):
             score3 = score_mat[j][i - 1] + 1
             score_mat[j][i] = min(score1, score2, score3)
             if score_mat[j][i] == score1:
-                bactrace_mat[j][i] = "d"
+                backtrack_mat[j][i] = "d"
             elif score_mat[j][i] == score2:
-                bactrace_mat[j][i] = "u"
+                backtrack_mat[j][i] = "u"
             elif score_mat[j][i] == score3:
-                bactrace_mat[j][i] = "l"
+                backtrack_mat[j][i] = "l"
 
     j = len(str1) - 1
     i = len(str2) - 1
     aligned_1 = ""
     aligned_2 = ""
     while i != 0 or j != 0:
-        direction = bactrace_mat[j][i]
+        direction = backtrack_mat[j][i]
         if direction == "d":
             aligned_1 = str1[j] + aligned_1
             aligned_2 = str2[i] + aligned_2
