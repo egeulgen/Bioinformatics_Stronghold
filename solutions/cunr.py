@@ -8,6 +8,10 @@ def double_factorial(n):
         return n * double_factorial(n - 2)
 
 
+def count_unrooted_binary_trees(n):
+    return double_factorial(2 * n - 5) % int(1e6)
+
+
 if __name__ == "__main__":
     '''
     Let b(n) denote the total number of distinct unrooted binary trees having n labeled leaves.
@@ -18,4 +22,4 @@ if __name__ == "__main__":
     n = int(input_lines[0])
 
     # The total number is just the double factorial: (2n - 5)!!
-    print(double_factorial(2 * n - 5) % int(1e6))
+    print(count_unrooted_binary_trees(n))
