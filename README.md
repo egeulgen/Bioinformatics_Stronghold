@@ -94,3 +94,4 @@
 1. [Overlap Alignment](solutions/oap.py)
 1. [Finding a Motif with Modifications](solutions/sims.py)
 1. [Semiglobal Alignment](solutions/smgb.py)
+1. [Global Alignment with Scoring Matrix and Affine Gap Penalty](solutions/gaff.py)
