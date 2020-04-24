@@ -77,6 +77,7 @@
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
 
 
+1. [Genome Assembly Using Reads](solutions/gasm.py)
 1. [Creating a Restriction Map](solutions/pdpl.py)
 1. [Identifying Maximal Repeats](solutions/mrep.py)
 1. [Multiple Alignment](solutions/mult.py)
