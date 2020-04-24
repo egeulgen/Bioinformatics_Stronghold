@@ -75,7 +75,7 @@ BLOSUM62 = {
 
 
 
-def optimal_alignment_with_affine_gap(str1, str2, gap_open=11, gap_extend=1):
+def global_alignment_with_affine_gap(str1, str2, gap_open=11, gap_extend=1):
     str1 = "-" + str1
     str2 = "-" + str2
 
@@ -128,7 +128,7 @@ def optimal_alignment_with_affine_gap(str1, str2, gap_open=11, gap_extend=1):
             else:
                 key = (str2[j], str1[i])
             diagonal = Middle[i - 1][j - 1] + BLOSUM62[key]
-            Middle[i][j] = max([diagonal, Upper[i][j], Lower[i][j]])
+            Middle[i][j] = max(diagonal, Upper[i][j], Lower[i][j])
             if Middle[i][j] == diagonal:
                 BacktrackM[i][j] = "d"
             elif Middle[i][j] == Lower[i][j]:
@@ -190,7 +190,7 @@ if __name__ == "__main__":
     stringA = list(parse_fasta(input_lines).values())[0]
     stringB = list(parse_fasta(input_lines).values())[1]
 
-    score, aligned_strA, aligned_strB = optimal_alignment_with_affine_gap(stringA, stringB)
+    score, aligned_strA, aligned_strB = global_alignment_with_affine_gap(stringA, stringB)
 
     print(score)
     print(aligned_strA)
