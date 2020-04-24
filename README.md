@@ -91,4 +91,5 @@
 1. [Global Alignment with Constant Gap Penalty](solutions/gcon.py)
 
 
+1. [Finding a Motif with Modifications](solutions/sims.py)
 1. [Semiglobal Alignment](solutions/smgb.py)
