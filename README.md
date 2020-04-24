@@ -78,6 +78,7 @@
 1. [Enumerating Unrooted Binary Trees](solutions/eubt.py)
 1. [Counting Rooted Binary Trees](solutions/root.py)
 1. [Phylogeny Comparison with Split Distance](solutions/sptd.py)
+1. [Counting Quartets](solutions/cntq.py)
 
 1. [Genome Assembly Using Reads](solutions/gasm.py)
 1. [Creating a Restriction Map](solutions/pdpl.py)
