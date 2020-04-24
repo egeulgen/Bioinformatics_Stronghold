@@ -75,7 +75,7 @@
 1. [Encoding Suffix Trees](solutions/suff.py)
 1. [Counting Optimal Alignments](solutions/ctea.py)
 1. [Global Alignment with Scoring Matrix](solutions/glob.py)
-
+1. [Enumerating Unrooted Binary Trees](solutions/eubt.py)
 
 1. [Genome Assembly Using Reads](solutions/gasm.py)
 1. [Creating a Restriction Map](solutions/pdpl.py)
