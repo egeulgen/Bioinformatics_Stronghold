@@ -9,7 +9,7 @@ def local_alignment(str1, str2):
     str2 = "-" + str2
 
     score_mat = [[0 for i in range(len(str2))] for j in range(len(str1))]
-    backtrace_mat = [[None for i in range(len(str2))] for j in range(len(str1))]
+    backtrack_mat = [[None for i in range(len(str2))] for j in range(len(str1))]
 
     for i in range(1, len(str1)):
         for j in range(1, len(str2)):
@@ -26,11 +26,11 @@ def local_alignment(str1, str2):
             score3 = score_mat[i][j - 1] - 5
             score_mat[i][j] = max(score1, score2, score3, 0)
             if score_mat[i][j] == score1:
-                backtrace_mat[i][j] = "d"
+                backtrack_mat[i][j] = "d"
             if score_mat[i][j] == score2:
-                backtrace_mat[i][j] = "u"
+                backtrack_mat[i][j] = "u"
             if score_mat[i][j] == score3:
-                backtrace_mat[i][j] = "l"
+                backtrack_mat[i][j] = "l"
 
     max_score = -1
     for i in range(len(str1)):
@@ -44,7 +44,7 @@ def local_alignment(str1, str2):
     aligned_1 = ""
     aligned_2 = ""
     while score_mat[i][j] != 0:
-        direction = backtrace_mat[i][j]
+        direction = backtrack_mat[i][j]
         if direction == "d":
             aligned_1 = str1[i] + aligned_1
             aligned_2 = str2[j] + aligned_2

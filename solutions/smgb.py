@@ -7,7 +7,7 @@ def semiglobal_alignment(str1, str2):
     str2 = "-" + str2
 
     score_mat = [[0 for j in range(len(str2))] for i in range(len(str1))]
-    backtrace_mat = [[None for j in range(len(str2))] for i in range(len(str1))]
+    backtrack_mat = [[None for j in range(len(str2))] for i in range(len(str1))]
 
     for i in range(1, len(str1)):
         for j in range(1, len(str2)):
@@ -17,11 +17,11 @@ def semiglobal_alignment(str1, str2):
             score3 = score_mat[i][j - 1] - 1
             score_mat[i][j] = max(score1, score2, score3)
             if score_mat[i][j] == score1:
-                backtrace_mat[i][j] = "d"
+                backtrack_mat[i][j] = "d"
             elif score_mat[i][j] == score2:
-                backtrace_mat[i][j] = "u"
+                backtrack_mat[i][j] = "u"
             else:
-                backtrace_mat[i][j] = "l"
+                backtrack_mat[i][j] = "l"
 
     last_row_index = max(range(len(str2)), key=lambda x: score_mat[len(str1) - 1][x])
     last_column_index = max(range(len(str1)), key=lambda x: score_mat[x][len(str2) - 1])
@@ -44,10 +44,10 @@ def semiglobal_alignment(str1, str2):
         aligned_1 += '-'
 
     while i * j != 0:
-        if backtrace_mat[i][j] == "u":
+        if backtrack_mat[i][j] == "u":
             i -= 1
             aligned_2 = insert_indel(aligned_2, j)
-        elif backtrace_mat[i][j] == "l":
+        elif backtrack_mat[i][j] == "l":
             j -= 1
             aligned_1 = insert_indel(aligned_1, i)
         else:

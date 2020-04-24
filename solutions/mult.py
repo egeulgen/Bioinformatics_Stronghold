@@ -7,7 +7,7 @@ def multiple_alignment(str_list):
     str_list = ["-" + string for string in str_list]
 
     score_mat = {}
-    backtrace_mat = {}
+    backtrack_mat = {}
 
     def add_tuples_elemwise(t1, t2):
         return tuple(sum(x) for x in zip(t1, t2))
@@ -15,7 +15,7 @@ def multiple_alignment(str_list):
     ## all possible "moves"
     perm_list = list(product([0, -1], repeat=len(str_list)))[1:]
 
-    ## fill n-dimensional score and backtrace matrices
+    ## fill n-dimensional score and backtrack matrices
     for index in product(*map(range, map(lambda s: len(s) + 1, str_list))):
         if index.count(0) >= len(str_list) - 1:
             if sum(index) == 0:
@@ -28,7 +28,7 @@ def multiple_alignment(str_list):
                     if perm == move:
                         bck = idx
                         break
-                backtrace_mat[index] = bck
+                backtrack_mat[index] = bck
         else:
             possible_scores = []
             for perm_idx, move in enumerate(perm_list):
@@ -42,15 +42,15 @@ def multiple_alignment(str_list):
                             if chars[i] != chars[j]:
                                 current_cost -= 1
                     possible_scores.append((prev_score + current_cost, perm_idx))
-            score_mat[index], backtrace_mat[index] = max(possible_scores, key=lambda p: p[0])
+            score_mat[index], backtrack_mat[index] = max(possible_scores, key=lambda p: p[0])
 
-    ## Backtrace
+    ## backtrack
     alignment = ["" for x in str_list]
     current_index = list(map(len, str_list))
     max_score = score_mat[tuple(current_index)]
 
     while sum(current_index) != 0:
-        back_perm_idx = backtrace_mat[tuple(current_index)]
+        back_perm_idx = backtrack_mat[tuple(current_index)]
         permutation = perm_list[back_perm_idx]
         for i, perm_value in enumerate(permutation):
             if perm_value == 0:

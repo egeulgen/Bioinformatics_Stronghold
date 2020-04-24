@@ -110,7 +110,7 @@ class Tree:
         return '<Tree object>'
 
 
-def backtrace_path_from_node(tree, node, Text):
+def backtrack_path_from_node(tree, node, Text):
     # if root is reached, stop
     if node.label == "node1":
         return ''
@@ -122,7 +122,7 @@ def backtrace_path_from_node(tree, node, Text):
 
     path_substring = Text[incoming_edge.position - 1: incoming_edge.position + incoming_edge.length - 1]
 
-    path_substring = backtrace_path_from_node(tree, incoming_edge.from_node, Text) + path_substring
+    path_substring = backtrack_path_from_node(tree, incoming_edge.from_node, Text) + path_substring
 
     return path_substring
 
@@ -139,7 +139,7 @@ def find_longest_repeated_substring(suffix_tree, Text_s, k):
 
     longest_substring = ""
     for candidate in candidate_nodes:
-        substr = backtrace_path_from_node(suffix_tree, candidate, Text_s)
+        substr = backtrack_path_from_node(suffix_tree, candidate, Text_s)
         if len(substr) > len(longest_substring):
             longest_substring = substr
     return longest_substring
