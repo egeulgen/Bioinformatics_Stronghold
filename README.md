@@ -81,6 +81,7 @@
 1. [Counting Quartets](solutions/cntq.py)
 1. [Inferring Genotype from a Pedigree](solutions/mend.py)
 1. [The Wright-Fisher Model of Genetic Drift](solutions/wfmd.py)
+1. [Sex-Linked Inheritance](solutions/sexl.py)
 
 1. [Genome Assembly Using Reads](solutions/gasm.py)
 1. [Creating a Restriction Map](solutions/pdpl.py)
