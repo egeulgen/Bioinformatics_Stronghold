@@ -26,11 +26,6 @@ if __name__ == "__main__":
         raise Exception('no cols to unify!', splits)
 
 
-    def print_splits(splits):
-        for split in splits:
-            print(split)
-
-
     def print_clades(clades):
         for clade in clades:
             tree = Phylo.BaseTree.Tree.from_clade(clade)
@@ -38,13 +33,7 @@ if __name__ == "__main__":
 
 
     while 0 < len(splits):
-        print('===Vv')
-
-        print_clades(clades)
-        print_splits(splits)
-
         col1, col2 = find_cols_to_unify(splits)
-        print('match cols ', col1, col2)
 
         # remove the second of the unified columns
         for split in splits:
@@ -55,8 +44,6 @@ if __name__ == "__main__":
         # unify the clades
         clades[col1] = Phylo.BaseTree.Clade(clades=[clades[col1], clades[col2]])
         clades.pop(col2)
-
-        print('===A^')
 
     final_clade = Phylo.BaseTree.Clade(clades=clades)
     print_clades([final_clade])
