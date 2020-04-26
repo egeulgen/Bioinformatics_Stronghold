@@ -96,6 +96,7 @@
 1. [The Founder Effect and Genetic Drift](solutions/foun.py)
 1. [Fixing an Inconsistent Character Set](solutions/cset.py)
 1. [Assessing Assembly Quality with N50 and N75](solutions/asmq.py)
+1. [Genome Assembly with Perfect Coverage and Repeats](solutions/grep.py)
 
 1. [Overlap Alignment](solutions/oap.py)
 1. [Finding a Motif with Modifications](solutions/sims.py)
