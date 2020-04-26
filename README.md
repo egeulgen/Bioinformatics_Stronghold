@@ -92,6 +92,8 @@
 1. [Local Alignment with Scoring Matrix](solutions/loca.py)
 1. [Global Alignment with Constant Gap Penalty](solutions/gcon.py)
 
+1. [Wright-Fisher's Expected Behavior](solutions/ebin.py)
+
 1. [Assessing Assembly Quality with N50 and N75](solutions/asmq.py)
 
 1. [Overlap Alignment](solutions/oap.py)
