@@ -92,6 +92,7 @@
 1. [Local Alignment with Scoring Matrix](solutions/loca.py)
 1. [Global Alignment with Constant Gap Penalty](solutions/gcon.py)
 
+1. [Assessing Assembly Quality with N50 and N75](solutions/asmq.py)
 
 1. [Overlap Alignment](solutions/oap.py)
 1. [Finding a Motif with Modifications](solutions/sims.py)
