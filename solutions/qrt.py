@@ -12,8 +12,8 @@ if __name__ == "__main__":
 
     result = set()
     for s in input_lines[1: ]:
-        zeros = [n for (i, n) in enumerate(names) if s[n] == '0']
-        ones = [n for (i, n) in enumerate(names) if s[n] == '1']
+        zeros = [n for (i, n) in enumerate(names) if s[i] == '0']
+        ones = [n for (i, n) in enumerate(names) if s[i] == '1']
         zero_pairs = ((zeros[i], zeros[j]) for i in range(len(zeros)) for j in range(i + 1, len(zeros)))
         one_pairs = ((ones[i], ones[j]) for i in range(len(ones)) for j in range(i + 1, len(ones)))
         for c in product(zero_pairs, one_pairs):
