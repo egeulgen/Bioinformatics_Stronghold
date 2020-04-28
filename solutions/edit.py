@@ -16,7 +16,7 @@ def edit_distance(str1, str2):
 
     for i in range(1, len(str2)):
         for j in range(1, len(str1)):
-            if str1[j - 1] == str2[i - 1]:
+            if str1[j] == str2[i]:
                 score1 = score_mat[j - 1][i - 1]
             else:
                 score1 = score_mat[j - 1][i - 1] + 1
