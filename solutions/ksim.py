@@ -1,5 +1,27 @@
 import sys
-from edit import edit_distance
+
+
+def fast_edit_distance(str1, str2):
+    if str1 == str2:
+        return 0
+    if len(str1) == 0:
+        return len(str2)
+    if len(str2) == 0:
+        return len(str1)
+
+    previous_row = [i for i in range(len(str2) + 1)]
+    current_row = [0 for _ in range(len(str2) + 1)]
+
+    for i in range(len(str1)):
+        current_row[0] = i + 1
+        for j in range(len(str2)):
+            cost = 0 if str1[i] == str2[j] else 1
+            current_row[j + 1] = min(current_row[j] + 1, previous_row[j + 1] + 1, previous_row[j] + cost)
+
+        for j in range(len(str2) + 1):
+            previous_row[j] = current_row[j]
+
+    return current_row
 
 
 if __name__ == "__main__":
@@ -14,14 +36,11 @@ if __name__ == "__main__":
     stringA = input_lines[1]
     stringB = input_lines[2]
 
-    ## Find a faster solution!!!!!
+    ### Still brute force - very slow
     result = []
-    checked = []
-    for i in range(len(stringB) - 2):
-        for j in range(i + 2, len(stringB)):
-            substring = stringB[i:j]
-            if edit_distance(stringA, substring) <= k:
-                result.append((i + 1, len(substring)))
-
-    for r in result:
-        print(str(r[0]) + " " + str(r[1]))
+    for i in range(len(stringB) + len(stringA) - k):
+        str_B = stringB[i:]
+        last_row = fast_edit_distance(stringA, str_B)
+        idx = [j for j in range(len(str_B)) if last_row[j] <= k]
+        for j in idx:
+            print(i + 1, j)
