@@ -1,5 +1,4 @@
 import sys
-import operator
 from rosalind_utility import parse_fasta
 from rosalind_utility import hamming_dist
 
@@ -22,15 +21,19 @@ class Node():
         self.children.append(child)
 
 
-def best_string(str1, str2):
+def most_frequent(List):
+    return max(set(List), key=List.count)
+
+
+def best_string(str1, str2, m_alignment):
     final_str = ""
     for pos in range(len(str1)):
-        if str1[pos] == "-" and str2[pos] == "-":
-            final_str += "A"
-        elif str1[pos] == str2[pos]:
+        possible = [val[pos] for val in m_alignment.values()]
+
+        if str1[pos] == str2[pos]:
             final_str += str1[pos]
         elif str1[pos] != "-" and str2[pos] != "-":
-            final_str += str1[pos]
+            final_str += most_frequent(possible)
         elif str1[pos] == "-":
             final_str += str2[pos]
         else:
@@ -86,7 +89,7 @@ class Newick():
             for node in remaining_nodes:
                 if node.name not in m_alignment:
                     if all(x in [self.name_index[name] for name in m_alignment] for x in node.children):
-                        string = best_string(m_alignment[inv_name_index[node.children[0]]], m_alignment[inv_name_index[node.children[1]]])
+                        string = best_string(m_alignment[inv_name_index[node.children[0]]], m_alignment[inv_name_index[node.children[1]]], m_alignment)
                         m_alignment[node.name] = string
                         new_m_alignment[node.name] = string
                         remaining_nodes = [node for node in self.nodes if node.name not in m_alignment]
@@ -126,7 +129,7 @@ if __name__ == "__main__":
     newick = input_lines[0]
     multiple_alignment = parse_fasta(input_lines[1:])
 
-    ## need to fix ""
+    ## need to fix "best_string"
     distance, internal_mult_alignment = ALPH(newick, multiple_alignment)
     print(distance)
     print_fasta(internal_mult_alignment)
