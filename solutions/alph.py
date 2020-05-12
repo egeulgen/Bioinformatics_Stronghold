@@ -25,12 +25,17 @@ class Node():
 def best_string(str1, str2):
     final_str = ""
     for pos in range(len(str1)):
-        counts = {}
-        for nuc in "ACGT":
-            counts[nuc] = 1 if str1[pos] == nuc else 0
-        for nuc in "ACGT":
-            counts[nuc] += 1 if str2[pos] == nuc else 0
-        final_str += max(counts.items(), key=operator.itemgetter(1))[0]
+        if str1[pos] == "-" and str2[pos] == "-":
+            final_str += "A"
+        elif str1[pos] == str2[pos]:
+            final_str += str1[pos]
+        elif str1[pos] != "-" and str2[pos] != "-":
+            final_str += str1[pos]
+        elif str1[pos] == "-":
+            final_str += str2[pos]
+        else:
+            final_str += str1[pos]
+
     return final_str
 
 
@@ -121,7 +126,7 @@ if __name__ == "__main__":
     newick = input_lines[0]
     multiple_alignment = parse_fasta(input_lines[1:])
 
-    ## need to fix best_string
+    ## need to fix ""
     distance, internal_mult_alignment = ALPH(newick, multiple_alignment)
     print(distance)
     print_fasta(internal_mult_alignment)
