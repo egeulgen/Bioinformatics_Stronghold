@@ -156,7 +156,6 @@ if __name__ == "__main__":
     newick = input_lines[0]
     multiple_alignment = parse_fasta(input_lines[1:])
 
-    ## need to fix "best_string"
     distance, internal_mult_alignment = ALPH(newick, multiple_alignment)
     print(distance)
     print_fasta(internal_mult_alignment)
