@@ -102,7 +102,7 @@
 1. [Finding a Motif with Modifications](solutions/sims.py)
 1. [Semiglobal Alignment](solutions/smgb.py)
 1. [Global Alignment with Scoring Matrix and Affine Gap Penalty](solutions/gaff.py)
-
-
+1. [Identifying Reversing Substitutions](solutions/rsub.py)
 1. [Isolating Symbols in Alignments](solutions/osym.py)
+
 1. [Local Alignment with Affine Gap Penalty](solutions/laff.py)

@@ -80,31 +80,25 @@ class Newick():
             return left_depth + 1
         return right_depth + 1
 
-
-    def fixed_len_paths(self, node, length):
+    def all_paths(self, node):
         if not node.children:
             return []
 
         visited = [node.name]
 
         all_paths = []
-        Q = [(node, [node.name], 1)]
+        Q = [(node, [node.name])]
 
         while Q:
-            current, path, depth = Q.pop()
-
+            current, path = Q.pop()
             for child_idx in current.children:
                 path2 = path[:]
-                depth2 = depth
                 child = self.nodes[child_idx]
                 if child.name not in visited:
                     visited.append(child.name)
                     path2.append(child.name)
-                    depth2 += 1
-                    if depth2 == length:
-                        all_paths.append(path2[:])
-                    elif depth2 < length:
-                        Q.append((child, path2[:], depth2))
+                    all_paths.append(path2[:])
+                    Q.append((child, path2[:]))
 
         return all_paths
 
@@ -118,12 +112,13 @@ class Newick():
         for pos in range(k):
             for node in pre_order:
                 if node.children:
-                    for length in range(3, max_dep + 1):
-                        paths = self.fixed_len_paths(node, length)
-                        for path in paths:
+                    paths = self.all_paths(node)
+                    for path in paths:
+                        if len(path) >= 3:
                             nucs = [DNA_strings[label][pos] for label in path]
                             if nucs[0] == nucs[-1] and nucs[0] != nucs[1]:
-                                rsub_list.append([path[1], path[-1], str(pos + 1), "->".join(nucs)])
+                                if all(x == nucs[1:-1][0] for x in nucs[1:-1]):
+                                    rsub_list.append([path[1], path[-1], str(pos + 1), "->".join([nucs[0], nucs[1], nucs[-1]])])
         return rsub_list
 
 
