@@ -1,28 +1,33 @@
 import sys
 
 
-def fast_edit_distance(str1, str2):
-    if str1 == str2:
-        return 0
-    if len(str1) == 0:
-        return len(str2)
-    if len(str2) == 0:
-        return len(str1)
+def inside_band(i, j, k):
+    return -k <= i - j <= k
 
-    previous_row = [i for i in range(len(str2) + 1)]
-    current_row = [0 for _ in range(len(str2) + 1)]
 
-    for i in range(len(str1)):
-        current_row[0] = i + 1
-        for j in range(len(str2)):
-            cost = 0 if str1[i] == str2[j] else 1
-            current_row[j + 1] = min(current_row[j] + 1, previous_row[j + 1] + 1, previous_row[j] + cost)
+def edit_distance_kband(str1, str2, bandwidth):
+    str1 = "-" + str1
+    str2 = "-" + str2
 
-        if i != len(str1) - 1:
-            for j in range(len(str2) + 1):
-                previous_row[j] = current_row[j]
+    diff = len(str1) - len(str2)
 
-    return current_row[-1]
+    score_mat = [[1e6 for j in range(len(str2))] for i in range(len(str1))]
+
+    for i in range(bandwidth + 1 + diff):
+        score_mat[i][0] = i
+    for j in range(1, bandwidth + 1):
+        score_mat[0][j] = j
+
+    for i in range(1, len(str1)):
+        for h in range(-bandwidth - diff, bandwidth + 1):
+            j = i + h
+            if 1 <= j < len(str2):
+                score_mat[i][j] = score_mat[i - 1][j - 1] + (1 if str1[i] != str2[j] else 0)
+                if inside_band(i - 1, j, bandwidth + diff):
+                    score_mat[i][j] = min(score_mat[i][j], score_mat[i - 1][j] + 1)
+                if inside_band(i, j - 1, bandwidth):
+                    score_mat[i][j] = min(score_mat[i][j], score_mat[i][j - 1] + 1)
+    return score_mat
 
 
 if __name__ == "__main__":
@@ -38,20 +43,30 @@ if __name__ == "__main__":
     stringB = input_lines[2]
 
     len_A = len(stringA)
+    len_B = len(stringB)
 
     edit_dist_dict = {}
 
-    for i in range(len(stringB)):
-        j = len_A - k
-        while j <= len_A + k:
-            substr_B = stringB[i:i + j]
+    for i in range(len_B - len_A + k + 1):
+        last = min(len_B, i + len_A + k)
+        length = last - i + 1
 
-            if substr_B not in edit_dist_dict:
-                edit_dist_dict[substr_B] = fast_edit_distance(substr_B, stringA)
+        substr = stringB[i:last]
 
-            d = edit_dist_dict[substr_B]
-            if d <= k:
-                print(i + 1, len(substr_B))
-            if d > k:
-                break
-            j += 1
+        if substr in edit_dist_dict:
+            score_mat = edit_dist_dict[substr]
+        else:
+            if len(substr) < len_A:
+                score_mat = edit_distance_kband(stringA, substr, k)
+            else:
+                score_mat = edit_distance_kband(substr, stringA, k)
+            edit_dist_dict[substr] = score_mat
+
+        if len(score_mat) > len(score_mat[0]):
+            for idx in range(len(score_mat)):
+                if score_mat[idx][len_A] <= k:
+                    print(i + 1, idx)
+        else:
+            for idx in range(len(score_mat[0])):
+                if score_mat[len_A][idx] <= k:
+                    print(i + 1, idx)
