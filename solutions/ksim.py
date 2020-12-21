@@ -22,7 +22,7 @@ def fast_edit_distance(str1, str2):
             for j in range(len(str2) + 1):
                 previous_row[j] = current_row[j]
 
-    return current_row
+    return current_row[-1]
 
 
 if __name__ == "__main__":
@@ -37,12 +37,21 @@ if __name__ == "__main__":
     stringA = input_lines[1]
     stringB = input_lines[2]
 
-    ### Still brute force - very slow
-    result = []
-    for i in range(len(stringB) - 1):
-        str_B = stringB[i:]
-        last_row = fast_edit_distance(stringA, str_B)
-        # print(last_row)
-        idx = [j for j in range(len(str_B)) if last_row[j] <= k]
-        for j in idx:
-            print(i + 1, j)
+    len_A = len(stringA)
+
+    edit_dist_dict = {}
+
+    for i in range(len(stringB)):
+        j = len_A - k
+        while j <= len_A + k:
+            substr_B = stringB[i:i + j]
+
+            if substr_B not in edit_dist_dict:
+                edit_dist_dict[substr_B] = fast_edit_distance(substr_B, stringA)
+
+            d = edit_dist_dict[substr_B]
+            if d <= k:
+                print(i + 1, len(substr_B))
+            if d > k:
+                break
+            j += 1
