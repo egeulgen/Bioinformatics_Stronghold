@@ -18,8 +18,9 @@ def fast_edit_distance(str1, str2):
             cost = 0 if str1[i] == str2[j] else 1
             current_row[j + 1] = min(current_row[j] + 1, previous_row[j + 1] + 1, previous_row[j] + cost)
 
-        for j in range(len(str2) + 1):
-            previous_row[j] = current_row[j]
+        if i != len(str1) - 1:
+            for j in range(len(str2) + 1):
+                previous_row[j] = current_row[j]
 
     return current_row
 
@@ -38,9 +39,10 @@ if __name__ == "__main__":
 
     ### Still brute force - very slow
     result = []
-    for i in range(len(stringB) + len(stringA) - k):
+    for i in range(len(stringB) - 1):
         str_B = stringB[i:]
         last_row = fast_edit_distance(stringA, str_B)
+        # print(last_row)
         idx = [j for j in range(len(str_B)) if last_row[j] <= k]
         for j in idx:
             print(i + 1, j)
