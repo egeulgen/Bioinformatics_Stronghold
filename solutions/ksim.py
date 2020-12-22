@@ -18,19 +18,18 @@ if __name__ == "__main__":
 
     for i in range(len_B - len_A + k + 1):
         print(i)
-        last = min(len_B, i + len_A + k)
-        length = last - i + 1
+        last = min(len_B, i + len_A + k + 1)
 
         substr = stringB[i:last]
         len_substr = len(substr)
 
         if len(substr) < len_A:
             score_mat = edit_distance_kband(stringA, substr, k)
-            for idx in range(len_substr):
+            for idx in range(len_substr + 1):
                 if score_mat[-1, idx] <= k:
                     print(i + 1, idx)
         else:
             score_mat = edit_distance_kband(substr, stringA, k)
-            for idx in range(len_substr):
+            for idx in range(len_substr + 1):
                 if score_mat[idx, -1] <= k:
                     print(i + 1, idx)
