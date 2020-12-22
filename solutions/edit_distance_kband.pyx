@@ -4,12 +4,12 @@ cimport numpy as cnp
 cdef bint inside_band(int i, int j, int k):
     return -k <= i - j <= k
 
-cpdef cnp.ndarray edit_distance_kband(str str1, str str2, int bandwidth):
+cdef cnp.ndarray edit_distance_kband(str str1, str str2, int bandwidth):
 
     cdef int m = len(str1) + 1
     cdef int n = len(str2) + 1
 
-    cdef int diff = len(str1) - len(str2)
+    cdef int diff = m - n
 
     cdef cnp.ndarray[cnp.int_t, ndim = 2] score_mat
     score_mat = np.full((m, n), 1e6, dtype=int)
@@ -29,3 +29,36 @@ cpdef cnp.ndarray edit_distance_kband(str str1, str str2, int bandwidth):
                 if inside_band(i, j - 1, bandwidth):
                     score_mat[i, j] = min(score_mat[i, j], score_mat[i, j - 1] + 1)
     return score_mat
+
+
+cpdef list ksim_solver(str stringA, str stringB, int k):
+    cdef int len_A = len(stringA)
+    cdef int len_B = len(stringB)
+
+    cdef int last = 0
+    cdef str substr = ""
+    cdef int len_substr = 0
+
+    cdef list res = []
+    for i in range(len_B - len_A + k + 1):
+        print(i)
+        last = min(len_B, i + len_A + k + 1)
+
+        substr = stringB[i:last]
+        len_substr = len(substr)
+
+        if len_substr < len_A:
+            score_mat = edit_distance_kband(stringA, substr, k)
+            for idx in range(len_substr, 0, -1):
+                if score_mat[-1, idx] == 1e6:
+                    break
+                if score_mat[-1, idx] <= k:
+                    res.append((i + 1, idx))
+        else:
+            score_mat = edit_distance_kband(substr, stringA, k)
+            for idx in range(len_substr, 0, -1):
+                if score_mat[idx, -1] == 1e6:
+                    break
+                if score_mat[idx, -1] <= k:
+                    res.append((i + 1, idx))
+    return res

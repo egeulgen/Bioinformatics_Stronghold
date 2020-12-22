@@ -1,5 +1,6 @@
 import sys
-from edit_distance_kband import edit_distance_kband
+from edit_distance_kband import ksim_solver
+
 
 if __name__ == "__main__":
     '''
@@ -13,23 +14,4 @@ if __name__ == "__main__":
     stringA = input_lines[1]
     stringB = input_lines[2]
 
-    len_A = len(stringA)
-    len_B = len(stringB)
-
-    for i in range(len_B - len_A + k + 1):
-        print(i)
-        last = min(len_B, i + len_A + k + 1)
-
-        substr = stringB[i:last]
-        len_substr = len(substr)
-
-        if len(substr) < len_A:
-            score_mat = edit_distance_kband(stringA, substr, k)
-            for idx in range(len_substr + 1):
-                if score_mat[-1, idx] <= k:
-                    print(i + 1, idx)
-        else:
-            score_mat = edit_distance_kband(substr, stringA, k)
-            for idx in range(len_substr + 1):
-                if score_mat[idx, -1] <= k:
-                    print(i + 1, idx)
+    ksim_solver(stringA, stringB, k)
