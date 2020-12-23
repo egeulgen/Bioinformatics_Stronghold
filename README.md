@@ -74,7 +74,7 @@
 1. [Using the Spectrum Graph to Infer Peptides](solutions/sgra.py)
 1. [Encoding Suffix Trees](solutions/suff.py)
 1. [Counting Optimal Alignments](solutions/ctea.py)
-1. [Global Alignment with Scoring Matrix](solutions/ros_glob.py)
+1. [Global Alignment with Scoring Matrix](solutions/glob.py)
 1. [Enumerating Unrooted Binary Trees](solutions/eubt.py)
 1. [Counting Rooted Binary Trees](solutions/root.py)
 1. [Phylogeny Comparison with Split Distance](solutions/sptd.py)
@@ -104,5 +104,5 @@
 1. [Global Alignment with Scoring Matrix and Affine Gap Penalty](solutions/gaff.py)
 1. [Identifying Reversing Substitutions](solutions/rsub.py)
 1. [Isolating Symbols in Alignments](solutions/osym.py)
-
+1. [Finding All Similar Motifs](solutions/ksim.cpp)
 1. [Local Alignment with Affine Gap Penalty](solutions/laff.py)
